@@ -1,25 +1,40 @@
 'use strict';
+var productOneId = 'productPic1';
+var productTwoId = 'productPic2';
+var productThreeId = 'productPic3';
 
 var productArray =[];
-var totalClicks = 0;
 
-function getRandomPictureNumber(){
-  var randomNumber = Math.floor(Math.random() * productArray.length);
-  return randomNumber;
+function RandomPictureGenerator(){
+//   this.previousProductPicture = [-1, -2, -3];
+  this.currentProductPicture = [];
+
+  this.getRandomPictureNumber = function(){
+    var randomNumber = Math.floor(Math.random() * productArray.length);
+    return randomNumber;
+  };
+  this.generateRandomThreeProducts = function(){
+    this.currentProductPicture = [];
+
+    var newRandomNumber = this.getRandomPictureNumber();
+
+    while(this.currentProductPicture.length < 4; ){
+        if(this.currentProductPicture.includes(newRandomNumber)){
+            newRandomNumber = this.getRandomPictureNumber();
+          } else {
+            this.currentProductPicture.push(newRandomNumber);
+          }
+    }
+  
+  };
 }
 
-var previousIndex = -1;
 
-function renderRandomProduct() {
-  var productPictureReference = document.getElementById('productPic1');
+
+function renderRandomThreeProducts() {
+  var productPictureReference = document.getElementById(productOneId);
 
   var randomIndex = getRandomPictureNumber();
-
-  while(randomIndex === previousIndex) {
-    randomIndex = getRandomPictureNumber();
-  }
- 
-  previousIndex = randomIndex;
   var randomProduct = productArray[randomIndex];
 
   productPictureReference.src = randomProduct.picturePath;
@@ -54,7 +69,7 @@ new BusMallProduct('img/usb.gif', 'tentacle drive');
 new BusMallProduct('img/water-can.jpg', 'watering can');
 new BusMallProduct('img/wine-glass.jpg', 'spill-safe wine glass');
 
-renderRandomProduct();
+renderRandomThreeProducts();
 
-var productPictureReference = document.getElementById('productPic1');
-productPictureReference.addEventListener('click', renderRandomProduct);
+var productPictureReference = document.getElementById(productOneId);
+productPictureReference.addEventListener('click', renderRandomThreeProducts);
