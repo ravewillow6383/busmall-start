@@ -1,75 +1,18 @@
 'use strict';
 
-var productImage1 = document.getElementById(‘productPic1’);
-var productPic2 = document.getElementById(‘productPic2’);
-var productPic3 = document.getElementById(‘productPic3’);
+var pictureOneReference = document.getElementById('ProductPic1');
+var pictureTwoReference = document.getElementById('ProductPic2');
+var pictureThreeReference = document.getElementById('ProductPic3');
 
 var currentPic1 = 0;
 var currentPic2 = 1;
 var currentPic3 = 2;
-
+var clickTracker = 0;
 var productsArray = [];
 
 function getRandomPictureNumber() {
-    var randomNumber = Math.floor(Math.random() * productsArray.length);
-    return randomNumber;
-  }
-
-var productDisplay = function(event) {
-    if(event.target.id === 'productPic1' || event.target.id === 'productPic2' || event.target === 'productPic3') {
-        do {
-            var randomPic1 = getRandomPictureNumber();
-        } while (randomPic1 === currentPic1 || randomPic1 === currentPic2 || randomPic1 === currentPic3);
-        do {
-            var randomPic2 = getRandomPictureNumber();
-        } while (randomPic2 === currentPic1 || randomPic2 === currentPic2 || randomPic2 === currentPic3 || randomPic2 === randomPic1);       
-        do {
-            var randomPic3 = getRandomPictureNumber();
-        } while (randomPic3 === currentPic1 || randomPic3 === currentPic2 || randomPic3 === currentPic3 || randomPic3 === randomPic1 || randomPic3 === randomPic2);
-    }
-    function renderProductPicture1() {
-        var productPictureReference = document.getElementById('ProductPic1');
-      
-        var randomIndex = randomPic1;
-    
-        var randomProduct = productsArray[randomIndex];
-      
-        productPictureReference.src = randomProduct.picturePath;
-        productPictureReference.alt = randomProduct.description;
-
-
-
-}
-function renderProductPicture2() {
-  var productPictureReference = document.getElementById('ProductPic2');
-
-  var randomIndex = getRandomPictureNumber();
-
-  while(randomIndex === previousIndex) {
-    randomIndex = getRandomPictureNumber();
-  }
-  previousIndex = randomIndex;
-
-  var randomProduct = productsArray[randomIndex];
-
-  productPictureReference.src = randomProduct.picturePath;
-  productPictureReference.alt = randomProduct.description;
-}
-function renderProductPicture3() {
-  var productPictureReference = document.getElementById('ProductPic2');
-
-  var randomIndex = getRandomPictureNumber();
-
-  while(randomIndex === previousIndex) {
-    randomIndex = getRandomPictureNumber();
-  }
-
-  previousIndex = randomIndex;
-
-  var randomProduct = productsArray[randomIndex];
-
-  productPictureReference.src = randomProduct.picturePath;
-  productPictureReference.alt = randomProduct.description;
+  var randomNumber = Math.floor(Math.random() * productsArray.length);
+  return randomNumber;
 }
 
 function BusMallProduct(picturePath, description) {
@@ -79,21 +22,63 @@ function BusMallProduct(picturePath, description) {
 }
 
 BusMallProduct.prototype.renderProductPicture = function() {
-  productPic1.src = this.src;
-  productPic2.src = this.src;
-  productPic3.src = this.src;
+  pictureOneReference.src = this.src;
+  pictureTwoReference.src = this.src;
+  pictureThreeReference.src = this.src;
 };
-    currentPic1 = randomPic1;
-    currentPic2 = randomPic2;
-    currentPic3 = randomPic3;
 
-    productPic1.src = productsArray[randomPic1].src;
-    productPic2.src = productsArray[randomPic2].src;
-    productPic3.src = productsArray[randomPic3].src;
-}
+var productDisplay = function(event) {
+  if(event.target.id === 'productPic1' || event.target.id === 'productPic2' || event.target === 'productPic3') {
+    do {
+      var randomPic1 = getRandomPictureNumber();
+    } while (randomPic1 === currentPic1 || randomPic1 === currentPic2 || randomPic1 === currentPic3);
+    do {
+      var randomPic2 = getRandomPictureNumber();
+    } while (randomPic2 === currentPic1 || randomPic2 === currentPic2 || randomPic2 === currentPic3 || randomPic2 === randomPic1);
+    do {
+      var randomPic3 = getRandomPictureNumber();
+    } while (randomPic3 === currentPic1 || randomPic3 === currentPic2 || randomPic3 === currentPic3 || randomPic3 === randomPic1 || randomPic3 === randomPic2);
+  }
+  function renderProductPicture1() {
+    var productPictureReference = document.getElementById('ProductPic1');
+    var randomIndex = randomPic1;
+    var randomProduct = productsArray[randomIndex];
 
-imageSection.addEventListener('click', productDisplay);
+    productPictureReference.src = randomProduct.picturePath;
+    productPictureReference.alt = randomProduct.description;
+  }
+  function renderProductPicture2() {
+    var productPictureReference = document.getElementById('ProductPic2');
+    var randomIndex = randomPic2;
+    var randomProduct = productsArray[randomIndex];
 
+    productPictureReference.src = randomProduct.picturePath;
+    productPictureReference.alt = randomProduct.description;
+  }
+  function renderProductPicture3() {
+    var productPictureReference = document.getElementById('ProductPic2');
+    var randomIndex = randomPic3();
+    var randomProduct = productsArray[randomIndex];
+
+    productPictureReference.src = randomProduct.picturePath;
+    productPictureReference.alt = randomProduct.description;
+  }
+
+  currentPic1 = randomPic1;
+  currentPic2 = randomPic2;
+  currentPic3 = randomPic3;
+
+  renderProductPicture1();
+  renderProductPicture2();
+  renderProductPicture3();
+
+  clickTracker++;
+  if(clickTracker === 25) {
+    .removeEventListener('click', productDisplay);
+  }
+};
+
+image
 new BusMallProduct('img/bag.jpg', 'starwars luggage');
 new BusMallProduct('img/banana.jpg', 'banana slicer');
 new BusMallProduct('img/bathroom.jpg', 'joint toilet paper and teblet stand');
@@ -115,9 +100,4 @@ new BusMallProduct('img/usb.gif', 'tentacle drive');
 new BusMallProduct('img/water-can.jpg', 'watering can');
 new BusMallProduct('img/wine-glass.jpg', 'spill-safe wine glass');
 
-renderProductPicture1();
-renderProductPicture2();
-renderProductPicture3();
-
-var productPictureReference = document.getElementById('ProductPic1');
-productPictureReference.addEventListener('click', renderProductPicture1);
+productDisplay();
