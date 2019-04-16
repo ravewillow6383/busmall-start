@@ -72,6 +72,10 @@ var productDisplay = function(event) {
   renderProductPicture2();
   renderProductPicture3();
 
+  currentPic1.addEventListener('click', productDisplay);
+  currentPic2.addEventListener('click', productDisplay);
+  currentPic3.addEventListener('click', productDisplay);
+
   clickTracker++;
   if(clickTracker === 25) {
     currentPic1.removeEventListener('click', productDisplay);
@@ -103,3 +107,4 @@ new BusMallProduct('img/water-can.jpg', 'watering can');
 new BusMallProduct('img/wine-glass.jpg', 'spill-safe wine glass');
 
 productDisplay();
+
