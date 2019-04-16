@@ -74,11 +74,13 @@ var productDisplay = function(event) {
 
   clickTracker++;
   if(clickTracker === 25) {
-    .removeEventListener('click', productDisplay);
+    currentPic1.removeEventListener('click', productDisplay);
+    currentPic2.removeEventListener('click', productDisplay);
+    currentPic3.removeEventListener('click', productDisplay);
   }
 };
 
-image
+
 new BusMallProduct('img/bag.jpg', 'starwars luggage');
 new BusMallProduct('img/banana.jpg', 'banana slicer');
 new BusMallProduct('img/bathroom.jpg', 'joint toilet paper and teblet stand');
