@@ -1,4 +1,5 @@
 'use strict';
+
 var productOneId = 'productPic1';
 var productTwoId = 'productPic2';
 var productThreeId = 'productPic3';
@@ -10,7 +11,7 @@ var productDescriptions =[];
 var totalClicks = 0;
 
 function RandomPictureGenerator(){
-  this.previousProductPicture = [-1, -2, -3];
+  this.previousProductPicture = [];
   this.currentProductIndices = [];
 
   this.getRandomPictureNumber = function(){
@@ -51,9 +52,10 @@ function renderRandomThreeProducts(event) {
       }
     }
     totalClicks++;
-
     if(totalClicks === MAX_CLICKS) {
-      renderChart();
+      pictureSectionReferenceOne.removeEventListener('click', renderRandomThreeProducts);
+
+      //   renderChart();
     }
   }
   random.generateRandomThreeProducts();
@@ -70,7 +72,6 @@ function renderRandomThreeProducts(event) {
   var randomProductOne = productArray[indexOne];
   var randomProductTwo = productArray[indexTwo];
   var randomProductThree = productArray[indexThree];
-
 
   pictureReferenceOne.src = randomProductOne.picturePath;
   pictureReferenceOne.alt = randomProductOne.description;
@@ -112,15 +113,8 @@ new BusMallProduct('img/usb.gif', 'tentacle drive');
 new BusMallProduct('img/water-can.jpg', 'watering can');
 new BusMallProduct('img/wine-glass.jpg', 'spill-safe wine glass');
 
-
-
-var pictureReferenceOne = document.getElementById(productOneId);
-var pictureReferenceTwo = document.getElementById(productTwoId);
-var pictureReferenceThree = document.getElementById(productThreeId);
-
-pictureReferenceOne.addEventListener('click', renderRandomThreeProducts);
-pictureReferenceTwo.addEventListener('click', renderRandomThreeProducts);
-pictureReferenceThree.addEventListener('click', renderRandomThreeProducts);
+var pictureSectionReferenceOne = document.getElementById('product-section');
+pictureSectionReferenceOne.addEventListener('click', renderRandomThreeProducts);
 
 renderRandomThreeProducts();
 
