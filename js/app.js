@@ -10,6 +10,8 @@ var productArray =[];
 var productDescriptions =[];
 var totalClicks = 0;
 
+var listResults = document.getElementById('results');
+
 function RandomPictureGenerator(){
   this.previousProductPicture = [];
   this.currentProductIndices = [];
@@ -54,8 +56,8 @@ function renderRandomThreeProducts(event) {
     totalClicks++;
     if(totalClicks === MAX_CLICKS) {
       pictureSectionReferenceOne.removeEventListener('click', renderRandomThreeProducts);
-
-      //   renderChart();
+      drawChart();
+      renderList();
     }
   }
   random.generateRandomThreeProducts();
@@ -73,7 +75,12 @@ function renderRandomThreeProducts(event) {
   var randomProductTwo = productArray[indexTwo];
   var randomProductThree = productArray[indexThree];
 
+  randomProductOne.views++;
+  randomProductTwo.views++;
+  randomProductThree.views++;
+
   pictureReferenceOne.src = randomProductOne.picturePath;
+
   pictureReferenceOne.alt = randomProductOne.description;
   pictureReferenceTwo.src = randomProductTwo.picturePath;
   pictureReferenceTwo.alt = randomProductTwo.description;
@@ -81,10 +88,19 @@ function renderRandomThreeProducts(event) {
   pictureReferenceThree.alt = randomProductThree.description;
 }
 
+function renderList(){
+  for(var i = 0; i < productArray.length; i++){
+    var liElement = document.createElement('li');
+    liElement.textContent = `${productArray[i].description}: ${productArray[i].views} views and ${productArray[i].timesClicked} votes.`;
+    listResults.append(liElement);
+  }
+}
+
 function BusMallProduct(picturePath, description){
   this.picturePath = picturePath;
   this.description = description;
   this.timesClicked = 0;
+  this.views = 0;
   productArray.push(this);
   productDescriptions.push(description);
   this.registerClick = function() {
@@ -118,7 +134,47 @@ pictureSectionReferenceOne.addEventListener('click', renderRandomThreeProducts);
 
 renderRandomThreeProducts();
 
-// var random = new RandomPictureGenerator();
-// random.generateRandomThreeProducts();
+function drawChart(){
+  var canvasReference = document.getElementById('myChart');
+  var totalVotes = [];
+  for(var i = 0; i < productArray.length; i++){
+    totalVotes.push(productArray[i].timesClicked);
+  }
 
-// renderRandomThreeProducts(random.currentProductIndices);
+  new Chart(canvasReference, {
+    type: 'bar',
+    data: {
+      labels: productDescriptions,
+      datasets: [{
+        label: '# of Votes',
+        data: totalVotes,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}

@@ -2,3 +2,7 @@ img{
     display: inline-block;
     width: 200px;
 }
+#myChart{
+    max-width: 800px;
+    max-height: auto;
+}
