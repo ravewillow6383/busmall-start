@@ -2,16 +2,19 @@
 <html lang="en">
     <head>
         <title>Bus Mall Mag! Test group.</title>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
         <body>
             <h1>Please click on the Product that you like the most!</h1>
-            <ul id ="results"></ul>
             <section id ="product-section">
             <img id ="productPic1" src="" alt="">
             <img id ="productPic2" src="" alt="">
             <img id ="productPic3" src="" alt="">
             </section>
-            <canvas id="results-chart"></canvas>
+            <ul id ="results"></ul>
+            <canvas id="myChart" width="400" height="400"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
             <script src ="js/app.js"></script>
         </body>
 </html>
