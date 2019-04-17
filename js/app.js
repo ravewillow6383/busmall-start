@@ -6,7 +6,7 @@ var productThreeId = 'productPic3';
 var MAX_CLICKS = 25;
 
 var productArray =[];
-var productDescriptions[];
+var productDescriptions =[];
 var totalClicks = 0;
 
 function RandomPictureGenerator(){
@@ -38,24 +38,24 @@ function RandomPictureGenerator(){
     }
   };
   this.saveRandomNumber = function() {
-  }
+  };
 }
 
 var random = new RandomPictureGenerator();
 
 function renderRandomThreeProducts(event) {
   if(event){
-      for (var i = 0; i < productArray.length; i++) {
-          if(event.target.alt == productArray[i].description){
-          productArray[i].registerClick();
+    for (var i = 0; i < productArray.length; i++) {
+      if(event.target.alt === productArray[i].description){
+        productArray[i].registerClick();
       }
-  }
-  totalClicks++;
+    }
+    totalClicks++;
 
-  if(totalClicks === MAX_CLICKS) {
+    if(totalClicks === MAX_CLICKS) {
       renderChart();
+    }
   }
-}
   random.generateRandomThreeProducts();
   var productIndices = random.currentProductIndices;
 
@@ -87,8 +87,8 @@ function BusMallProduct(picturePath, description){
   productArray.push(this);
   productDescriptions.push(description);
   this.registerClick = function() {
-      this.timesClicked++;
-  }
+    this.timesClicked++;
+  };
 }
 
 new BusMallProduct('img/bag.jpg', 'starwars luggage');
@@ -124,7 +124,7 @@ pictureReferenceThree.addEventListener('click', renderRandomThreeProducts);
 
 renderRandomThreeProducts();
 
-var random = new RandomPictureGenerator();
-random.generateRandomThreeProducts();
+// var random = new RandomPictureGenerator();
+// random.generateRandomThreeProducts();
 
-renderRandomThreeProducts(random.currentProductIndices);
+// renderRandomThreeProducts(random.currentProductIndices);
