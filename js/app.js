@@ -3,42 +3,60 @@ var productOneId = 'productPic1';
 var productTwoId = 'productPic2';
 var productThreeId = 'productPic3';
 
+var MAX_CLICKS = 25;
+
 var productArray =[];
+var productDescriptions[];
+var totalClicks = 0;
 
 function RandomPictureGenerator(){
-//   this.previousProductPicture = [-1, -2, -3];
+  this.previousProductPicture = [-1, -2, -3];
   this.currentProductPicture = [];
 
   this.getRandomPictureNumber = function(){
     var randomNumber = Math.floor(Math.random() * productArray.length);
     return randomNumber;
-  };
+  }
+
+  this.isIndexDuplicated = function(newRandomNumber) {
+    return this.currentIndices.includes(newRandomNumber) || this.previousIndices.includes(newRandomNumber);
+  }
   this.generateRandomThreeProducts = function(){
     this.currentProductPicture = [];
 
     var newRandomNumber = this.getRandomPictureNumber();
 
-    while(this.currentProductPicture.length < 4; ){
-        if(this.currentProductPicture.includes(newRandomNumber)){
-            newRandomNumber = this.getRandomPictureNumber();
-          } else {
-            this.currentProductPicture.push(newRandomNumber);
-          }
+    while(this.currentProductPicture.length < 3){
+      if(this.currentProductPicture.includes(newRandomNumber)){
+        newRandomNumber = this.getRandomPictureNumber();
+      } else {
+        this.currentProductPicture.push(newRandomNumber);
+        newRandomNumber = this.getRandomPictureNumber();
+      }
     }
-  
   };
 }
 
+function renderRandomThreeProducts(productIndices) {
+  var pictureReferenceOne = document.getElementById(productOneId);
+  var pictureReferenceTwo = document.getElementById(productTwoId);
+  var pictureReferenceThree = document.getElementById(productThreeId);
+
+  var indexOne = productIndices[0];
+  var indexTwo = productIndices[1];
+  var indexThree = productIndices[2];  
+
+  var randomProductOne = productArray[indexOne];
+  var randomProductTwo = productArray[indexTwo];
+  var randomProductThree = productArray[indexThree];
 
 
-function renderRandomThreeProducts() {
-  var productPictureReference = document.getElementById(productOneId);
-
-  var randomIndex = getRandomPictureNumber();
-  var randomProduct = productArray[randomIndex];
-
-  productPictureReference.src = randomProduct.picturePath;
-  productPictureReference.alt = randomProduct.description;
+  pictureReferenceOne.src = productOneId.picturePath;
+  pictureReferenceOne.alt = productOneId.description;
+  pictureReferenceTwo.src = productTwoId.picturePath;
+  pictureReferenceTwo.alt = productTwoId.description;
+  pictureReferenceThree.src = productThreeId.picturePath;
+  pictureReferenceThree.alt = productThreeId.description;
 }
 
 function BusMallProduct(picturePath, description){
@@ -73,3 +91,8 @@ renderRandomThreeProducts();
 
 var productPictureReference = document.getElementById(productOneId);
 productPictureReference.addEventListener('click', renderRandomThreeProducts);
+
+var random = new RandomPictureGenerator();
+random.generateRandomThreeProducts();
+
+renderRandomThreeProducts(productIndices);
