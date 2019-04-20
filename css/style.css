@@ -1,8 +1,52 @@
 img{
     display: inline-block;
     width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border:solid;
 }
 #myChart{
-    max-width: 800px;
+    max-width: 960px;
     max-height: auto;
+}
+body{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url(https://sftextures.com/texture/6721/0/6720/wallpaper-fish-bone-light-seamless-interior-wall-design-texture-244x256.jpg); background-repeat: repeat;
+    width:960px;
+
+}
+canvas{
+    background-color: beige;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border:solid;
+}
+h1{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(51,204,204,0.2);
+    font-family: fantasy;
+    font-size: 45px;
+    text-align: right;
+}
+section{
+    background-color:rgba(51,204,204,0.2);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+ul{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    text-align: right;
+    font-weight: bold;
+    background-color: rgba(51,204,204,0.2);
+    border:solid;
+    width: 960px;
+
 }
