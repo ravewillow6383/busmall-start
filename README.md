@@ -67,3 +67,8 @@ In addition, you’ll want to be able to receive clicks on those displayed image
 
 
 After 25 selections have been made, turn off the event listeners on the images (to prevent additional voting) and also display a list of the products with votes received with each list item looking like “3 votes for the Banana Slicer”.
+
+## Day 02
+
+
+Your savvy marketing person has just informed you that just showing users the numbered data of the click percentages is not going to cut it. You need a visual representation to grab the user’s attention.
