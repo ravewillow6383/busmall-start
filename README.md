@@ -80,3 +80,21 @@ Marketing has gotten a lot of negative feedback from users who want to store the
 
 Fix this with local storage solution. 
 
+## Day 04
+
+Your senior dev was able to meet with you and your teammate for few minutes to get you oriented to the code base. She was able to give you the following pointers, before getting pulled into a code review for another feature.
+
+
+* There are multiple .js files
+
+* cart.js is used on the cart page and catalog.js is used on the page with the form
+
+* The app.js file carries some global variables that the others will reference, and is loaded into both pages
+
+* You will encounter and need to deal with a new type of form element
+
+* You will need to reference elements without IDs
+
+The focus group results have been collected and the BusMall catalog is ready to be released! The results were so positive that the marketing team would also like to make these products available for online purchase. Your task is to bring functionality to an order form page and a shopping cart page.
+
+
