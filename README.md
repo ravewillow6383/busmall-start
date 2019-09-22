@@ -72,3 +72,11 @@ After 25 selections have been made, turn off the event listeners on the images (
 
 
 Your savvy marketing person has just informed you that just showing users the numbered data of the click percentages is not going to cut it. You need a visual representation to grab the user’s attention.
+
+## Day 03
+
+
+Marketing has gotten a lot of negative feedback from users who want to store their results, so that when they refresh the page, or even if they leave their browser and return later they can still see their data from before.
+
+Fix this with local storage solution. 
+
